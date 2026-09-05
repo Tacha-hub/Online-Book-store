@@ -31,6 +31,8 @@
 
         <maven.checkstyle.plugin.configLocation>checkstyle.xml</maven.checkstyle.plugin.configLocation>
 
+        <maven.compiler.proc>full</maven.compiler.proc>
+
     </properties>
     <dependencies>
         <dependency>
