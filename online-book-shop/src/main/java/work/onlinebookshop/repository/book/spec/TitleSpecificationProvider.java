@@ -1,4 +1,4 @@
-package work.onlinebookshop.repository.book;
+package work.onlinebookshop.repository.book.spec;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -11,11 +11,11 @@ import work.onlinebookshop.model.Book;
 import work.onlinebookshop.repository.SpecificationProvider;
 
 @Component
-public class AuthorSpecificationProvider implements SpecificationProvider<Book> {
+public class TitleSpecificationProvider implements SpecificationProvider<Book> {
 
     @Override
     public String getKey() {
-        return "author";
+        return "title";
     }
 
     public Specification<Book> getSpecification(String params) {
@@ -24,7 +24,7 @@ public class AuthorSpecificationProvider implements SpecificationProvider<Book> 
             public @Nullable Predicate toPredicate(Root<Book> root,
                                                    CriteriaQuery<?> query,
                                                    CriteriaBuilder criteriaBuilder) {
-                return root.get("author").in(params);
+                return root.get("title").in(params);
             }
         };
     }
