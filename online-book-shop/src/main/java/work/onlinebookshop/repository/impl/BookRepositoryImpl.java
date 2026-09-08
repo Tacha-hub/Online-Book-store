@@ -1,6 +1,7 @@
 package work.onlinebookshop.repository.impl;
 
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -49,6 +50,15 @@ public class BookRepositoryImpl extends AbstractRepository implements BookReposi
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't find all books in database", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try (Session session = factory.openSession()) {
+            return Optional.ofNullable(session.get(Book.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find book with id: " + id, e);
         }
     }
 }
