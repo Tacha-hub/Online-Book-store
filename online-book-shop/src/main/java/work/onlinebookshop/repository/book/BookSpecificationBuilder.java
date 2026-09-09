@@ -11,18 +11,20 @@ import work.onlinebookshop.repository.SpecificationProviderManager;
 @RequiredArgsConstructor
 @Component
 public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
+    private static final String AUTHOR_KEY = "author";
+    private static final String TITLE_KEY = "title";
     private final SpecificationProviderManager<Book> bookSpecificationProviderManager;
 
     @Override
     public Specification<Book> build(BookSearchParameterDto searchParametr) {
         Specification<Book> spec = Specification.allOf();
         if (searchParametr.title() != null && !searchParametr.title().isBlank()) {
-            spec = spec.and(bookSpecificationProviderManager.getSpecificationProvider("title")
+            spec = spec.and(bookSpecificationProviderManager.getSpecificationProvider(TITLE_KEY)
                     .getSpecification(searchParametr.title()));
         }
 
         if (searchParametr.author() != null && !searchParametr.author().isBlank()) {
-            spec = spec.and(bookSpecificationProviderManager.getSpecificationProvider("author")
+            spec = spec.and(bookSpecificationProviderManager.getSpecificationProvider(AUTHOR_KEY)
                     .getSpecification(searchParametr.author()));
         }
         return spec;
